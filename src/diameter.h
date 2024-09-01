@@ -86,15 +86,12 @@ typedef enum {
 
 struct diameter_hdr{
 #define DIAMETER_HEADER_LEN
+	struct{
+		unsigned int 				version:8;
+		unsigned int 				length:24;
+	}
 	union{
-		unsigned int 				raw1;
-		struct{
-			unsigned int 			version:8;
-			unsigned int 			length:24;
-		};
-	};
-	union{
-		unsigned int 				raw2;
+		unsigned int 				command;
 		struct{
 			unsigned int 			flags:8;
 			unsigned int			command_code:24;
@@ -107,12 +104,9 @@ struct diameter_hdr{
 
 struct diameter_avp_hdr{
 	unsigned int 					code;
-	union{
-		unsigned int 				raw2;	
-		struct{
+	struct{
 			unsigned int 			flags:8;
 			unsigned int 			length:24;
-		};
 	};
 };
 
